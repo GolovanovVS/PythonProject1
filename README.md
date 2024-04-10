@@ -50,10 +50,10 @@
 
 ### Class `text`
 
-#### `read_files()`
+#### `read_files(self)`
 Считывает файлы формата `.txt` из папки `texts`
 
-#### `processing_file(file.txt)` 
+#### `processing_file(self, file.txt)` 
 Содержимое file.txt записывает в `exercises.json`
 
 ### Как использовать:
