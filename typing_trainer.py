@@ -3,6 +3,7 @@ from tkinter import simpledialog
 import time
 import json
 
+
 class TypingTrainer:
     def __init__(self, root):
         self.root = root
@@ -33,7 +34,6 @@ class TypingTrainer:
             self.exercises = ["Пример текста для набора."]
 
     def display_current_exercise(self):
-        # Обновляем текст упражнения
         self.current_exercise = self.exercises[self.current_exercise_index]
         self.text_label.config(text=self.current_exercise)
         self.entry_var.set("")
@@ -62,6 +62,7 @@ class TypingTrainer:
         else:
             self.text_label.config(text="Упражнения завершены!")
             self.entry.config(state='disabled')  # Отключаем ввод, если упражнения закончились
+
 
 if __name__ == "__main__":
     root = tk.Tk()
