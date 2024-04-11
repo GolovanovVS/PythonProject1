@@ -1,9 +1,17 @@
-from graphic_editor import *
+import tkinter as tk
+from tkinter import simpledialog
+import time
 
 
-class TypingTrainer:
+class GraphicEditor:
     def __init__(self, root):
-        graphic_editor = GraphicEditor(root)
+        self.root = root
+        self.setup_ui()
+        self.load_exercises()
+        self.current_exercise_index = 0
+        self.display_current_exercise()
+        self.start_time = 0
+        self.total_errors = 0
 
     def setup_ui(self):
         self.text_label = tk.Label(self.root, text="")
@@ -53,9 +61,3 @@ class TypingTrainer:
         else:
             self.text_label.config(text="Упражнения завершены!")
             self.entry.config(state='disabled')  # Отключаем ввод, если упражнения закончились
-
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    trainer = TypingTrainer(root)
-    root.mainloop()
