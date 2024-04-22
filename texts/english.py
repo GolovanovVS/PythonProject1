@@ -1,0 +1,4 @@
+Sentences = [
+	"Chto tam?",
+	"hhhh"
+]

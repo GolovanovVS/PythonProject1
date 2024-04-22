@@ -1,8 +1,9 @@
 import tkinter as tk
-from tkinter import simpledialog
 from statistics import Statistics
+from text import Text
+import texts.english
+import texts.russian
 import random
-import time
 import json
 
 
@@ -11,7 +12,11 @@ class TypingTrainer:
         self.root = root
         self.stat = Statistics()
         self.setup_ui()
-        self.load_exercise()
+        self.text = Text()
+        self.exercise = self.text.load_exercise()
+        self.text_label.config(text=self.exercise)
+        self.entry_var.set("")
+        self.stat.start_exercise()
 
     def setup_ui(self):
         self.text_label = tk.Label(self.root, text="")
@@ -26,23 +31,21 @@ class TypingTrainer:
         self.result_label.pack()
 
     def load_exercise(self):
-        try:
-            with open('exercises.json', 'r') as f:
-                self.all_exercises = json.load(f)
-                self.exercises = random.choice(self.all_exercises)
-        except FileNotFoundError:
-            self.exercises = ["Пример текста для набора."]
-        self.text_label.config(text=self.exercises)
+        if self.language == 'en':
+            self.exercise = random.choice(texts.english.Sentences)
+        if self.language == 'ru':
+            self.exercise = random.choice(texts.russian.Sentences)
+        self.text_label.config(text=self.exercise)
         self.entry_var.set("")
         self.stat.start_exercise()
 
     def on_type(self, *args):
         current_text = self.entry_var.get()
-        if not self.exercises.startswith(current_text):
+        if not self.exercise.startswith(current_text):
             self.stat.total_errors += 1
             self.entry_var.set(current_text[:-1])
-        if self.exercises == current_text:
-            result_text = self.stat.finish_exercise(len(self.exercises))
+        if self.exercise == current_text:
+            result_text = self.stat.finish_exercise(len(self.exercise))
             self.result_label.config(text=result_text)
             self.text_label.config(text="Упражнения завершены!")
             self.entry.config(state='disabled')  # Отключаем ввод, если упражнения закончились

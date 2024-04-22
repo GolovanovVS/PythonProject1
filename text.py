@@ -1,22 +1,18 @@
-import json
-import os
-import pwd
-import re
-from pathlib import Path
+import random
+
+import texts.english
 
 
 class Text:
-    def read_files(self):
-        cur_path = Path(__file__).parent
-        target = cur_path / 'texts'
-        for file in target.rglob('*.txt'):
-            self.sentences += file.read_text().split('.')
-
-    def processing_file(self, file):
-        with open(file, 'r') as f:
-            data = f.read()
-
-    def load_exercises(self):
-        with open('default_exercises.json', 'r') as f:
-            exercises = json.load(f)
-        return exercises
+    def load_exercise(self):
+        while (True):
+            print('Choose a language:')
+            language = input('"en" if english, "ru" if russian \n')
+            if language == 'en' or language == 'ru':
+                break
+        exercise = ''
+        if language == 'en':
+            exercise = random.choice(texts.english.Sentences)
+        if language == 'ru':
+            exercise = random.choice(texts.russian.Sentences)
+        return exercise
