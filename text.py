@@ -1,18 +1,17 @@
 import random
 
-import texts.english
+import texts
 
 
 class Text:
-    def load_exercise(self):
-        while (True):
-            print('Choose a language:')
-            language = input('"en" if english, "ru" if russian \n')
-            if language == 'en' or language == 'ru':
-                break
-        exercise = ''
-        if language == 'en':
-            exercise = random.choice(texts.english.Sentences)
-        if language == 'ru':
-            exercise = random.choice(texts.russian.Sentences)
+    def load_exercise_en(self):
+        exercise = random.choice(texts.english.Sentences)
+        return exercise
+
+    def load_exercise_ru(self):
+        exercise = random.choice(texts.russian.Sentences)
+        return exercise
+
+    def load_exercise_dig(self):
+        exercise = random.choice(texts.english.Sentences)
         return exercise
