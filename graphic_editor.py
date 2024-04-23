@@ -4,7 +4,7 @@ from statistics import Statistics
 from text import Text
 
 
-class TypingTrainer:
+class GraphicEditor:
     def __init__(self, root):
         self.root = root
         self.exercise = ''
@@ -16,6 +16,8 @@ class TypingTrainer:
         self.start_interface()
 
     def start_interface(self):
+        for widget in self.root.winfo_children():
+            widget.destroy()
         label = tk.Label(self.root, text="Choose an exercise", font=("Helvetica", 30))
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
@@ -57,7 +59,7 @@ class TypingTrainer:
         self.text_label.pack()
 
         self.entry_var = tk.StringVar()
-        self.entry_var.trace("w", self.on_type, )
+        self.entry_var.trace("w", self.on_type)
 
         self.entry = tk.Entry(self.root, textvariable=self.entry_var, font=self.custom_font_not_bold)
         self.entry.pack()
@@ -75,3 +77,8 @@ class TypingTrainer:
             self.result_label.config(text=result_text)
             self.text_label.config(text="Упражнения завершены!")
             self.entry.config(state='disabled')
+            button = tk.Button(self.root, text="Retry", command=self.start_interface, width=20, height=5)
+            screen_width = self.root.winfo_screenwidth()
+            screen_height = self.root.winfo_screenheight()
+            button.place(x=int(screen_width/4), y=int(screen_height / 2) - 50, anchor='center')
+
