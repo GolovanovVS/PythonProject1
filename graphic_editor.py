@@ -2,10 +2,6 @@ import tkinter as tk
 from tkinter import font
 from statistics import Statistics
 from text import Text
-import texts.english
-import texts.russian
-import random
-import json
 
 
 class TypingTrainer:
@@ -13,38 +9,34 @@ class TypingTrainer:
         self.root = root
         self.exercise = ''
         self.text = Text()
+        self.custom_font = font.Font(family="Helvetica", size=20, weight="bold")
+        self.custom_font_not_bold = font.Font(family="Helvetica", size=20)
         self.root.title("Typing Trainer")
-        window_width = 800
-        window_height = 400
+        self.stat = Statistics()
+        self.start_interface()
+
+    def start_interface(self):
+        label = tk.Label(self.root, text="Choose an exercise", font=("Helvetica", 30))
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
+        window_width = int(screen_width / 2)
+        window_height = int(screen_height / 2)
+        label.place(x=int(window_width/2), y=int(window_height/3), anchor="center")
         x = int((screen_width / 2) - (window_width / 2))
         y = int((screen_height / 2) - (window_height / 2))
         self.root.geometry(f'{window_width}x{window_height}+{x}+{y}')
-        self.stat = Statistics()
-        self.start_ui()
+        self.add_buttons()
 
-    def start_ui(self):
-        label = tk.Label(self.root, text="Choose an exercise")
+    def add_buttons(self):
         button_en = tk.Button(self.root, text="English", command=lambda: self.load_exercise('en'), width=20, height=3)
+        button_en.place(x=0, y=0)
         button_ru = tk.Button(self.root, text="Russian", command=lambda: self.load_exercise('ru'), width=20, height=3)
         button_dig = tk.Button(self.root, text="Digits", command=lambda: self.load_exercise('dig'), width=20, height=3)
-        label.pack()
-        button_en.pack()
-        button_ru.pack()
-        button_dig.pack()
-
-    def setup_ui(self):
-        self.text_label = tk.Label(self.root, text="")
-        self.text_label.pack()
-
-        self.entry_var = tk.StringVar()
-        self.entry_var.trace("w", self.on_type)
-        self.entry = tk.Entry(self.root, textvariable=self.entry_var)
-        self.entry.pack()
-
-        self.result_label = tk.Label(self.root, text="")
-        self.result_label.pack()
+        vert = int(self.root.winfo_screenheight() / 4)
+        horiz = int(self.root.winfo_screenwidth() / 4)
+        button_en.place(y=vert, x=(horiz / 2), anchor="center")
+        button_ru.place(y=vert, x=horiz, anchor="center")
+        button_dig.place(y=vert, x=horiz + (horiz / 2), anchor="center")
 
     def load_exercise(self, line: str):
         if line == 'en':
@@ -55,11 +47,23 @@ class TypingTrainer:
             self.exercise = self.text.load_exercise_dig()
         for widget in self.root.winfo_children():
             widget.destroy()
-        self.setup_ui()
-        custom_font = font.Font(family="Helvetica", size=20, weight="bold")
-        self.text_label.config(text=self.exercise, width=200, height=10, font=custom_font)
+        self.exercise_interface()
+        self.text_label.config(text=self.exercise, width=200, height=10, font=self.custom_font)
         self.entry_var.set("")
         self.stat.start_exercise()
+
+    def exercise_interface(self):
+        self.text_label = tk.Label(self.root, text="")
+        self.text_label.pack()
+
+        self.entry_var = tk.StringVar()
+        self.entry_var.trace("w", self.on_type, )
+
+        self.entry = tk.Entry(self.root, textvariable=self.entry_var, font=self.custom_font_not_bold)
+        self.entry.pack()
+        self.entry.focus_set()
+        self.result_label = tk.Label(self.root, text="")
+        self.result_label.pack()
 
     def on_type(self, *args):
         current_text = self.entry_var.get()
