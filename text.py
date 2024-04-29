@@ -1,21 +1,20 @@
 import random
-import texts.english
-import texts.russian
-import texts.digits
+
+from texts import english, russian, digits
 
 
 class Text:
     @staticmethod
     def load_exercise_en():
-        exercise = random.choice(texts.english.Sentences)
+        exercise = random.choice(english.Sentences)
         return exercise
 
     @staticmethod
     def load_exercise_ru():
-        exercise = random.choice(texts.russian.Sentences)
+        exercise = random.choice(russian.Sentences)
         return exercise
 
     @staticmethod
     def load_exercise_dig():
-        exercise = random.choice(texts.digits.Sentences)
+        exercise = random.choice(digits.Sentences)
         return exercise

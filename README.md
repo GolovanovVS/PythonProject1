@@ -7,9 +7,13 @@
 
 ### Основные функции:
 
+### File `main.py`
+
+Пример кода, использующего тренажер
+
 ### Class `TypingTrainer`
 
-Класс, отвечающий за запуск программы
+Класс, отвечающий за создание объекта Typing_Trainer
 
 #### `__init__(self, root)`
 
@@ -87,3 +91,21 @@
 
 - Tkinter (библиотека встроена, но если выдается ошибка, то )
   попробуйте переустановить библиотеку через ```sudo apt-get install python3-tk```
+
+
+### Структура проекта
+
+#### project/
+- `texts`
+  - `digits.py`
+  - `english.py`
+  - `russian.py`
+- `statistics.py`
+- `text.py`
+- `graphic_editor.py`
+- `typing_trainer.py`
+- `main.py`
+
+### Служебные файлы:
+- `requirements.txt`
+- `.gitignore`
