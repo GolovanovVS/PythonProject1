@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import font
 
-from statistics import Statistics
-from text import Text
+from src.statistics import Statistics
+from src.text import Text
 
 
 class GraphicEditor:

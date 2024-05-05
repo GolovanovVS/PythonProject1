@@ -1,6 +1,6 @@
 import random
 
-from texts import english, russian, digits
+from src.texts import english, russian, digits
 
 
 class Text:

@@ -1,5 +1,6 @@
-from graphic_editor import GraphicEditor
 import tkinter as tk
+
+from src.graphic_editor import GraphicEditor
 
 
 class TypingTrainer:
@@ -7,3 +8,6 @@ class TypingTrainer:
         root = tk.Tk()
         GraphicEditor(root)
         root.mainloop()
+
+
+TypingTrainer()

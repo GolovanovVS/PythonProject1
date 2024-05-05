@@ -96,15 +96,17 @@
 ### Структура проекта
 
 #### project/
-- `texts`
-  - `digits.py`
-  - `english.py`
-  - `russian.py`
-- `statistics.py`
-- `text.py`
-- `graphic_editor.py`
-- `typing_trainer.py`
+- `src/`
+  - `texts/`
+    - `digits.py`
+    - `english.py`
+    - `russian.py`
+  - `statistics.py`
+  - `text.py`
+  - `graphic_editor.py`
+  - `typing_trainer.py`
 - `main.py`
+- `README.md`
 
 ### Служебные файлы:
 - `requirements.txt`
